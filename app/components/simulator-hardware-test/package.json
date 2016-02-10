@@ -1,0 +1,17 @@
+{
+  "name": "simulator-rpi",
+  "version": "1.0.0",
+  "description": "The Raspberry PI bindings for the iSaveWater simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pi-gpio": "0.0.8"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}

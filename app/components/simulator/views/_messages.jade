@@ -1,0 +1,19 @@
+div
+    - if (messages) {
+        - var error = messages.error;
+        - var info = messages.info;
+        - var success = messages.success;
+        - if (error) {
+            p#error.alert.alert-danger.text-center #{error}
+                button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+        - } else if (success) {
+            p#success.alert.alert-success.text-center #{success}
+                button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+        - } else if (info) {
+            p#info.alert.alert-info.text-center #{info}
+                button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+        - } else if (warning) {
+            p#warning.alert.alert-warning.text-center #{warning}
+                button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+        - }
+    -}

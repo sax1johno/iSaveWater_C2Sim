@@ -1,0 +1,47 @@
+block variables
+    - var bodyId = "";
+    - var bodyClasses = "";
+doctype html
+html
+    head
+        block title
+            title Thoughts on Programming and Other Cool Stuff
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(name="description", content="Development ideas, portfolios, and other generally cool stuff")
+        meta(name="author", content="John O'Connor")
+        link(rel="stylesheet", href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic")
+        link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+        link(rel="stylesheet", href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css")
+        link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css")
+        link(rel="stylesheet", href="//fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet", href="/css/style.css")
+        block css
+        block styles
+        block scripts
+            script(src="//code.jquery.com/jquery-2.1.1.min.js")
+            script(src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.min.js")
+            script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js")
+            script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js")
+            script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js")
+            script(src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-resource.min.js")
+            script(src="//cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.2/angular-local-storage.min.js")
+            script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js")
+            script(src="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js")
+    - // body(id=bodyId, class=bodyClasses, ng-cloak)
+    body(ng-app="isavewater_simulator", ng-cloak)
+        div(layout="column", layout-fill)
+            div.header
+                block header
+                    include _header
+            div.messages
+                block messages
+                    include _messages
+            block contentDiv
+                div.content(flex, layout="row")
+                    block content
+            div.footer
+                block footer
+                    include _footer                
+    block userScripts
+    // include otherScripts
+    // include analytics

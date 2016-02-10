@@ -1,0 +1,43 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "The Command, Control, and simulation system for the iSaveWater project",
+  "main": "config.development.js",
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.14.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "morgan": "^1.6.1",
+    "seneca": "^1.1.0",
+    "seneca-account": "^0.1.8",
+    "seneca-admin": "^0.2.0",
+    "seneca-auth": "^0.4.0",
+    "seneca-data-editor": "^0.2.0",
+    "seneca-express-middleware": "^1.0.0",
+    "seneca-perm": "^0.5.6",
+    "seneca-settings": "^0.1.4",
+    "seneca-user": "^0.2.10",
+    "seneca-views": "^0.1.1",
+    "temp": "^0.8.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sax1johno/iSaveWater_C2Sim.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sax1johno/iSaveWater_C2Sim/issues"
+  },
+  "homepage": "https://github.com/sax1johno/iSaveWater_C2Sim#readme"
+}

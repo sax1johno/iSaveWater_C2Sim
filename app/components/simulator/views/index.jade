@@ -1,0 +1,13 @@
+extends layout
+
+block variables
+  - var bodyId = "page-top";
+  - var bodyClasses = "landing-page";
+
+append content
+  div(ng-controller="HomeController")
+    h1 Hi there.
+    include _home
+
+append scripts
+  include _angularAppScripts 
