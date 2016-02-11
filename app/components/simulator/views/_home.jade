@@ -1,1 +1,33 @@
-h1 This is the home page.
+md-content(flex)
+    md-tabs(md-border-bottom, flex, md-dynamic-height)
+        md-tab(label="Area1")
+            md-content.md-padding(layout="row")
+                md-card(md-padding)
+                    md-card-title(style="padding-bottom: 0; margin-bottom: 0", flex="none")
+                        md-card-title-text(flex="none") Overcurrent
+                        md-switch(style="padding-top: 0; margin-top: 0; margin-left: 10px;")
+                md-card(md-padding)
+                    md-card-title(style="padding-bottom: 0; margin-bottom: 0", flex="none")
+                        md-card-title-text(flex="none") Flow
+                        md-switch(style="padding-top: 0; margin-top: 0; margin-left: 10px;")
+                    md-card-content                        
+                        div(layout="row")
+                            md-input-container(flex="10")
+                                input(type="number", step="any", name="rate", min="0", max="30", value="15")
+                            md-input-container(flex="30")
+                                md-select(ng-model="unit")
+                                    md-option(value="gallons", selected) GALLONS
+                            md-input-container.text-center(layout-align="center center", flex="20")
+                                span PER
+                            md-input-container(flex)
+                                md-select(ng-model="time")
+                                    md-option(value="minute", selected) MINUTE
+                md-card(md-padding)
+                    md-card-title(style="padding-bottom: 0; margin-bottom: 0", flex="none")
+                        md-card-title-text(flex="none") Zone 1
+                        md-switch(style="padding-top: 0; margin-top: 0; margin-left: 10px;")
+                    md-card-content                        
+                        md-switch Valve 1
+                        md-switch Valve 2
+                        md-switch Valve 3
+                        md-switch Valve 4                   

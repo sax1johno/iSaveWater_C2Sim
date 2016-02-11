@@ -46,6 +46,7 @@ seneca.use('auth',{
 
 // Custom Seneca Plugins
 seneca.use('app/components/simulator/index');
+seneca.use('app/components/simulator-hardware-test/index').listen
 // seneca()
 //   .use(color)
 //   .listen()

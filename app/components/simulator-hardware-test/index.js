@@ -101,5 +101,4 @@ module.exports = function(options) {
     return {
         name: pluginName
     };
-    
 };
