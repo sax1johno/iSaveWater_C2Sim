@@ -1,33 +1,30 @@
 md-content(flex)
-    md-tabs(md-border-bottom, flex, md-dynamic-height)
-        md-tab(label="Area1")
-            md-content.md-padding(layout="row")
+    md-tabs(md-border-bottom, flex, md-dynamic-height, ng-repeat="area in areas")
+        md-tab(label="{{area.name}}")
+            md-content.md-padding(layout="row", layout-align="space-around start")
                 md-card(md-padding)
                     md-card-title(style="padding-bottom: 0; margin-bottom: 0", flex="none")
                         md-card-title-text(flex="none") Overcurrent
-                        md-switch(style="padding-top: 0; margin-top: 0; margin-left: 10px;")
+                        md-switch(ng-model="data[area.id].overcurrent.enabled", ng-true-value="'on'", ng-false-value="'off'", style="padding-top: 0; margin-top: 0; margin-left: 10px;")
                 md-card(md-padding)
                     md-card-title(style="padding-bottom: 0; margin-bottom: 0", flex="none")
                         md-card-title-text(flex="none") Flow
-                        md-switch(style="padding-top: 0; margin-top: 0; margin-left: 10px;")
-                    md-card-content                        
+                        md-switch(ng-model="data[area.id].flow.enabled", ng-true-value="'on'", ng-false-value="'off'", style="padding-top: 0; margin-top: 0; margin-left: 10px;")
+                    md-card-content
                         div(layout="row")
                             md-input-container(flex="10")
-                                input(type="number", step="any", name="rate", min="0", max="30", value="15")
+                                input(ng-model="data[area.id].flow.amount", type="number", step="any", name="rate", min="0", max="30", value="15")
                             md-input-container(flex="30")
-                                md-select(ng-model="unit")
+                                md-select(ng-model="data[area.id].flow.unit")
                                     md-option(value="gallons", selected) GALLONS
                             md-input-container.text-center(layout-align="center center", flex="20")
                                 span PER
                             md-input-container(flex)
-                                md-select(ng-model="time")
+                                md-select(ng-model="data[area.id].flow.time")
                                     md-option(value="minute", selected) MINUTE
-                md-card(md-padding)
+                md-card(md-padding, ng-repeat="zone in area.zones")
                     md-card-title(style="padding-bottom: 0; margin-bottom: 0", flex="none")
-                        md-card-title-text(flex="none") Zone 1
+                        md-card-title-text(flex="none") {{ zone.name }}
                         md-switch(style="padding-top: 0; margin-top: 0; margin-left: 10px;")
-                    md-card-content                        
-                        md-switch Valve 1
-                        md-switch Valve 2
-                        md-switch Valve 3
-                        md-switch Valve 4                   
+                    md-card-content(ng-repeat="valve in zone.valves")
+                        md-switch(ng-model="data[area.id][zone.id][valve.id].enabled")

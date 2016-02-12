@@ -211,10 +211,32 @@ module.exports = function(options) {
     });
     
     seneca.add({'role': pluginName, 'cmd': 'activate', 'type': 'flow'}, function(args, done) {
-        seneca.make('flow').load$(args.id, function(err, loadedFlow) {
+        var rate = args.rate;
+        var unit = args.unit;
+        var time = args.time;
+        var freqency = rate / 2;
+        // Gallons per minute ratio is 15Hz = 30 gal / min SO HZ = galmin / 2
+        // Calculate frequency based on Unit / Minute
+        var flow = seneca.make$("flow");
+        flow.list$({}, function(err, flowList) {
             if (err) done(err);
             else {
-                done({"failure": "Flow command not available yet."})
+                console.log('flow', flowList);
+                var main = flowList[0];
+                console.log('main = ', main.pin);
+                var pin = main.pin;
+        // seneca.add({"role": pluginName, "cmd": "pulse", "pin": {required$: true}, "rate": {required$: true}}, function(args, done) {
+                this.act({
+                    "role": pluginName,
+                    "cmd": "pulse",
+                    "pin": pin,
+                    "rate": freqency // Rate in HZ
+                }, function(err, result) {
+                    // TODO: Set the value of the overcurrent pin to the specified state.
+                    done(err, result);
+                });
+
+                // done({"failure": "Flow command not available yet."})
                 // this.act({
                 //     "role": pluginName,
                 //     "cmd": "write",
@@ -227,32 +249,38 @@ module.exports = function(options) {
         });
     });
     
-    seneca.add({'role': pluginName, 'cmd': 'deactive', 'type': 'flow'}, function(args, done) {
-        
-        if (!_.isUndefined(zone)) {
-            // foo_entity.load$( id, function(err,foo){
-            //   console.log(foo)
-            // })
-            seneca.make('zone').load$(zone, function(err, loadedZone) {
-                if (err) done(err);
-                else {
-                    this.act({
-                        "role": pluginName,
-                        "cmd": "write",
-                        "pin": loadedZone.pin,
-                        "value": 0
-                    }, function(err, result) {
-                        done(err, result);
-                    });
-                }
-            });
-        } else {
-            if (!_.isUndefined(area)) {
-                done({"error": "Command not yet implemented for areas"});
-            } else {
-                done({"error": "This command requires an area or zone"});
+    seneca.add({'role': pluginName, 'cmd': 'deactivate', 'type': 'flow'}, function(args, done) {
+        // Gallons per minute ratio is 15Hz = 30 gal / min SO HZ = galmin / 2
+        // Calculate frequency based on Unit / Minute
+        var flow = seneca.make$("flow");
+        flow.list$({}, function(err, flowList) {
+            if (err) done(err);
+            else {
+                if (err) return done(err);
+                var main = flowList[0];
+                var pin = main.pin;
+                
+        // seneca.add({"role": pluginName, "cmd": "pulse", "pin": {required$: true}, "rate": {required$: true}}, function(args, done) {
+                this.act({
+                    "role": pluginName,
+                    "cmd": "stop_pulse",
+                    "pin": pin
+                }, function(err, result) {
+                    // TODO: Set the value of the overcurrent pin to the specified state.
+                    done(err, result);
+                });
+
+                // done({"failure": "Flow command not available yet."})
+                // this.act({
+                //     "role": pluginName,
+                //     "cmd": "write",
+                //     "pin": loadedFlow.pin,
+                //     "value": 0
+                // }, function(err, result) {
+                //     done(err, result);
+                // });
             }
-        }
+        });
     });
     
 
