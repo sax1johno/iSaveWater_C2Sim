@@ -91,10 +91,15 @@ module.exports = function(options) {
     // Pulse the specified pin at the specified rate in Hz
     seneca.add({"role": pluginName, "cmd": "pulse", "pin": {required$: true}, "rate": {required$: true}}, function(args, done) {
         // console.log(args);
-        done(null, {"success": "Would set off a task that pulses pin " + args.pin + " at rate " + args.rate});
+        // var rateInMS = 1000 / args.rate;
+        // var state = false;
+        // var timer = setInterval(function() {
+        //     state = !state;
+        // }, rateInMS);
+        done(null, {"success": "Would set off a task that pulses pin " + args.pin + " at rate " + args.rate, timer: {}});
     });
     
-    seneca.add({"role": pluginName, "cmd": "stop_pulse", "pin": {required$:true}}, function(args, done) {
+    seneca.add({"role": pluginName, "cmd": "stop_pulse", "pin": {required$:true}, 'timer': {required$:true }}, function(args, done) {
         done(null, {"success": "Would have stopped pin " + args.pin + " from pulsing."}) 
     });
     

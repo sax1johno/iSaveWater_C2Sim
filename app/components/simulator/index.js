@@ -264,7 +264,8 @@ module.exports = function(options) {
                 this.act({
                     "role": pluginName,
                     "cmd": "stop_pulse",
-                    "pin": pin
+                    "pin": pin,
+                    "timer": args.timer
                 }, function(err, result) {
                     // TODO: Set the value of the overcurrent pin to the specified state.
                     done(err, result);

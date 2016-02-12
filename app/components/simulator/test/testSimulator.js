@@ -191,9 +191,9 @@ describe('simulator', function() {
             // });
         });
         
-        it('should test the ability to activate the flow solenoid', function(done) {
+        it('should test the ability to deactivate the flow solenoid', function(done) {
             var params = {};
-            _.extend(params, {"role": "simulator", "cmd": "deactivate", type: 'flow'});
+            _.extend(params, {"role": "simulator", "cmd": "deactivate", type: 'flow', timer: {}});
             seneca.act(
                 params,
                     function (err, results) {
