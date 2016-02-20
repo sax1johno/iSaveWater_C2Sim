@@ -12,7 +12,7 @@
  **/
 
 module.exports = {
-  appName: "iSaveWater Command and Control System",
+  appName: "iSaveWater Monitoring Interface",
   main: {
     port:process.env.PORT
   },

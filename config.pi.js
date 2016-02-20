@@ -21,14 +21,6 @@ module.exports = {
     // change to true if you want to send emails
     sendemail:false
   },
-  azure: {
-    protocol: "amqps",
-    eventHubHost: "IrrigationManagement.azure-devices.net",
-    sasname: "iothubowner",
-    saskey: "Pkx9m0Yr9gEczbGJ6vFkATXh10bSbev5xldkG/p/dD0=",
-    eventHubName: "iothub-ehub-irrigation-14719-22219fc3c6",
-    numPartitions: 2
-  }
 //   mail: {
 //     mail: {from:'sax1johno@gmail.com'},
 //     config:{

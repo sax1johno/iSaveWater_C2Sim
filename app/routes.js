@@ -6,9 +6,11 @@
 var express = require('express'),
     router = express(),
     path = require('path'),
-    simulator = require('./components/simulator/routes');
+    simulator = require('./components/simulator/routes'),
+    status = require('./components/status/routes');
 
 // Set up the components to use in this app.
 router.use(simulator);
+router.use(status);
 
 module.exports = router;

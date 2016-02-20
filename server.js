@@ -45,7 +45,15 @@ seneca.use('auth',{
 
 // Custom Seneca Plugins
 seneca.use('app/components/simulator/index');
-seneca.use('app/components/simulator-hardware-test/index');
+
+if (environment == "pi") {
+  seneca.use("app/components/simulator-hardware-pi/index");
+} else {
+  seneca.use('app/components/simulator-hardware-test/index');
+}
+
+seneca.use('app/components/status/index', require('./' + configFile).azure);
+
 // seneca()
 //   .use(color)
 //   .listen()

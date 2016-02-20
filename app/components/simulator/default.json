@@ -4,11 +4,11 @@
             "name": "Area 1",
             "overcurrent": {
                 "name": "Overcurrent Sensor",
-                "pin": 6
+                "pin": 16
             },
             "flow": {
                 "name": "Flow 1",
-                "pin": 7,
+                "pin": 6,
                 "minFlow": 0.0,
                 "maxFlow": 20.0,
                 "states": {
@@ -29,50 +29,9 @@
             "zones": [
                 {
                     "name": "Zone 1",
-                    "pin": 5
-                },
-                {
-                    "name": "Zone 2",
-                    "pin": 6
+                    "pin": 26
                 }
             ]
-        },
-        {
-            "name": "Area 2",
-            "overcurrent": {
-                "name": "Overcurrent Sensor",
-                "pin": 6
-            },
-            "flow": {
-                "name": "Flow 1",
-                "pin": 7,
-                "minFlow": 0.0,
-                "maxFlow": 20.0,
-                "states": {
-                    "nominal": {
-                        "lower": 14.0,
-                        "upper": 16.0
-                    },
-                    "caution": {
-                        "lower": 11.0,
-                        "upper": 17.5
-                    },
-                    "error": {
-                        "lower": 0.0,
-                        "upper": 20.0
-                    }
-                }
-            },        
-            "zones": [
-                {
-                    "name": "Zone 1",
-                    "pin": 5
-                },
-                {
-                    "name": "Zone 2",
-                    "pin": 6
-                }
-            ]
-        }        
+        }
     ]
 }
