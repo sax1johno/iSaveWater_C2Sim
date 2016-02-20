@@ -16,48 +16,6 @@ module.exports = function(options) {
     options = seneca.util.deepextend({
     },options);
 
-    // seneca.add({init:pluginName}, function(args, done) {
-    //     fs.readdir(path.join(__dirname, "/views"), function(err, files) {
-    //         if (err) {
-    //             done(err);
-    //         } else {
-    //             async.each(files, function(file, cb) {
-    //                 if (err) {
-    //                     cb(err);
-    //                 } else {
-    //                     var view = {};
-    //                     view.plugin = pluginName;
-    //                     view.ext = require('path').extname(file);
-    //                     view.name = require('path').basename(file, view.ext);
-    //                     view.path = path.join(__dirname, "/views", file);
-    //                     view.template = new Buffer(fs.readFileSync(view.path));
-    //                     seneca.act({
-    //                         role: "views",
-    //                         cmd: "add", 
-    //                         name: view.name,
-    //                         plugin: view.plugin,
-    //                         ext: view.ext,
-    //                         template: view.template
-    //                     }, function(err, result) {
-    //                         console.log(result);
-    //                         if (err) {
-    //                             cb(err);
-    //                         } else {
-    //                             cb();
-    //                         }
-    //                     });
-    //                 }
-    //             }, function(err) {
-    //                 if (err) {
-    //                     done(err);
-    //                 } else {
-    //                     done();
-    //                 }
-    //             });
-    //         }
-    //     }); 
-    // });
-
     // Opens a pin for use.
     seneca.add({"role": pluginName, "cmd": "open", "pin": {required$: true}}, function(args, done) {
         done(null, {"success": "Would have opened pin " + args.pin});

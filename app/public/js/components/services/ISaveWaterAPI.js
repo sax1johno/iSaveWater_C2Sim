@@ -1,17 +1,16 @@
 angular.module('isavewater_simulator')
-.factory('ISaveWaterAPI', function($http, settings) {
+.factory('ISaveWaterAPI', function(settings) {
     var SimulatorService = {
         getAreas: function(areasCallback) {
-            $http({
-                method: "GET",
-                url: "/areas"
-            }).success(function(data, status, headers, config) {
-                areasCallback(undefined, data);
-            }).
-              error(function(data, status, headers, config) {
-                  $log.log("error: " + data);
-                  areasCallback(data);
-              });
+            // $http({
+            //     method: "GET",
+            //     url: "/areas"
+            // }).success(function(data, status, headers, config) {
+            //     areasCallback(undefined, data);
+            // }).
+            //   error(function(data, status, headers, config) {
+            //       areasCallback(data);
+            //   });
         }
         // submitAccountInfo: function(accountInfo, submitCompleteFn) {
         //     var params = {

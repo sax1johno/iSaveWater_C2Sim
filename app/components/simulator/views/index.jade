@@ -5,8 +5,7 @@ block variables
   - var bodyClasses = "landing-page";
 
 append content
-  div(ng-controller="HomeController", layout="row", flex)
-    include _home
+  div(ui-view)
 
 append scripts
   include _angularAppScripts 

@@ -1,48 +1,49 @@
 var seneca = require('seneca')(),
     assert = require('assert'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    testSystem = require('../default');
 
-var testSystem = {
-    "areas": [
-        {
-            "name": "Area 1",
-            "zones": [
-                {
-                    "name": "Zone 1",
-                    "pin": 5
-                },
-                {
-                    "name": "Zone 2",
-                    "pin": 6
-                }
-            ]
-        }
-    ],
-    "overcurrent": {
-        "name": "Overcurrent Sensor",
-        "pin": 6
-    },
-    "flow": {
-        "name": "Flow 1",
-        "pin": 7,
-        "minFlow": 0.0,
-        "maxFlow": 20.0,
-        "states": {
-            "nominal": {
-                "lower": 14.0,
-                "upper": 16.0
-            },
-            "caution": {
-                "lower": 11.0,
-                "upper": 17.5
-            },
-            "error": {
-                "lower": 0.0,
-                "upper": 20.0
-            }
-        }
-    }
-};
+// var testSystem = {
+//     "areas": [
+//         {
+//             "name": "Area 1",
+//             "zones": [
+//                 {
+//                     "name": "Zone 1",
+//                     "pin": 5
+//                 },
+//                 {
+//                     "name": "Zone 2",
+//                     "pin": 6
+//                 }
+//             ]
+//         }
+//     ],
+//     "overcurrent": {
+//         "name": "Overcurrent Sensor",
+//         "pin": 6
+//     },
+//     "flow": {
+//         "name": "Flow 1",
+//         "pin": 7,
+//         "minFlow": 0.0,
+//         "maxFlow": 20.0,
+//         "states": {
+//             "nominal": {
+//                 "lower": 14.0,
+//                 "upper": 16.0
+//             },
+//             "caution": {
+//                 "lower": 11.0,
+//                 "upper": 17.5
+//             },
+//             "error": {
+//                 "lower": 0.0,
+//                 "upper": 20.0
+//             }
+//         }
+//     }
+// };
 
 describe('simulator', function() {
     it('should instantiate', function() {
@@ -83,35 +84,43 @@ describe('simulator', function() {
         it('should test the ability to turn on overcurrent pin', function(done) {
             var params = {};
             //     seneca.add({'role': pluginName, 'cmd': 'overcurrent', state: {required$: true}}, function(args, done) {
-            _.extend(params, {"role": "simulator", "cmd": "overcurrent", state: 1}); // Turn on Overcurrent
-            seneca.act(
-                params,
-                    function (err, results) {
-                        if (err) {
-                            done(err);
-                        } else {
-                            console.log(results);
-                            done();
+            var area = seneca.make$('area');
+            area.list$({}, function(err, areaList) {
+                var area = areaList[0];
+                _.extend(params, {"role": "simulator", "cmd": "activate", "type": "overcurrent", 'area': area}); // Turn on Overcurrent
+                seneca.act(
+                    params,
+                        function (err, results) {
+                            if (err) {
+                                done(err);
+                            } else {
+                                console.log(results);
+                                done();
+                            }
                         }
-                    }
-            );
+                );
+                });
         });
         
-        it('should test the ability to turn on overcurrent pin', function(done) {
+        it('should test the ability to turn off overcurrent pin', function(done) {
             var params = {};
             //     seneca.add({'role': pluginName, 'cmd': 'overcurrent', state: {required$: true}}, function(args, done) {
-            _.extend(params, {"role": "simulator", "cmd": "overcurrent", state: 0}); // Turn on Overcurrent
-            seneca.act(
-                params,
-                    function (err, results) {
-                        if (err) {
-                            done(err);
-                        } else {
-                            console.log(results);
-                            done();
+            var area = seneca.make$('area');
+            area.list$({}, function(err, areaList) {
+                var area = areaList[0];
+                _.extend(params, {"role": "simulator", "cmd": "deactivate", "type": "overcurrent", 'area': area}); // Turn on Overcurrent
+                seneca.act(
+                    params,
+                        function (err, results) {
+                            if (err) {
+                                done(err);
+                            } else {
+                                console.log(results);
+                                done();
+                            }
                         }
-                    }
-            );
+                );
+            });
         });
     });
     describe('#zone', function(done) {
@@ -176,36 +185,45 @@ describe('simulator', function() {
             var rate = 30;
             var unit = 'GALLONS';
             var time = 'MINUTE';
-            _.extend(params, {"role": "simulator", "cmd": "activate", type: 'flow'}, {rate: rate, unit: unit, time: time});
-            seneca.act(
-                params,
-                    function (err, results) {
-                        if (err) {
-                            done(err);
-                        } else {
-                            console.log(results);
-                            done();
+            var area = seneca.make$('area');
+            area.list$({}, function(err, areaList) {
+                if (err) return done(err);
+                var area = areaList[0];
+                _.extend(params, {"role": "simulator", "cmd": "activate", type: 'flow', 'area': area}, {rate: rate, unit: unit, time: time});
+                seneca.act(
+                    params,
+                        function (err, results) {
+                            if (err) {
+                                done(err);
+                            } else {
+                                console.log(results);
+                                done();
+                            }
                         }
-                    }
-            );
+                );
+            });
             // });
         });
         
         it('should test the ability to deactivate the flow solenoid', function(done) {
             var params = {};
-            _.extend(params, {"role": "simulator", "cmd": "deactivate", type: 'flow', timer: {}});
-            seneca.act(
-                params,
-                    function (err, results) {
-                        if (err) {
-                            done(err);
-                        } else {
-                            console.log(results);
-                            done();
+            var area = seneca.make$('area');
+            area.list$({}, function(err, areaList) {
+                if (err) return done(err);
+                var area = areaList[0];
+                _.extend(params, {"role": "simulator", "cmd": "deactivate", type: 'flow', 'area': area, timer: {}});
+                seneca.act(
+                    params,
+                        function (err, results) {
+                            if (err) {
+                                done(err);
+                            } else {
+                                console.log(results);
+                                done();
+                            }
                         }
-                    }
-            );
-            // });
+                );
+            });
         });
     });
     
